@@ -351,9 +351,11 @@ open class BarChartRenderer: BarLineScatterCandleBubbleRenderer
                 guard viewPortHandler.isInBoundsRight(barRect.origin.x) else { break }
 
                 context.setFillColor(dataSet.barShadowColor.cgColor)
-                let bezierPath = UIBezierPath(roundedRect: barRect, cornerRadius: 2)
+                let topCorner = CGSize(width: barRect.width/2, height: barRect.width/2)
+                let bottomCorner = CGSize(width: 2, height: 2)
+                
+                let bezierPath = UIBezierPath(shouldRoundRect: barRect, topLeftRadius: topCorner, topRightRadius: topCorner, bottomLeftRadius: bottomCorner, bottomRightRadius: bottomCorner)
                 context.addPath(bezierPath.cgPath)
-
                 context.drawPath(using: .fill)
             }
         }
